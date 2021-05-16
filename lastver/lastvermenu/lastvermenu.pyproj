@@ -2,15 +2,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>1bd3e8d4-e5c6-4b8a-a02d-253fd4631003</ProjectGuid>
+    <ProjectGuid>5ff1a8a9-4e35-401d-a12d-63f27785b987</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>menu.py</StartupFile>
+    <StartupFile>lastver.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>keyboard</Name>
-    <RootNamespace>keyboard</RootNamespace>
+    <Name>lastvermenu</Name>
+    <RootNamespace>lastvermenu</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,8 +21,11 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="menu.py" />
-    <Compile Include="text_insert.py" />
+    <Compile Include="lastver.py" />
+    <Compile Include="lastver1.py" />
+    <Compile Include="module1.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

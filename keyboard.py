@@ -66,7 +66,7 @@ class Ui_MainWindow(object):
         self.lkh.setGeometry(QtCore.QRect(590, 410, 51, 31))
         self.lkh.setObjectName("lkh")
         self.pushButton_18 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_18.setGeometry(QtCore.QRect(640, 410, 51, 31))
+        self.pushButton_18.setGeometry(QtCore.QRect(710, 330, 51, 31))
         self.pushButton_18.setObjectName("pushButton_18")
         self.pushButton_19 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_19.setGeometry(QtCore.QRect(390, 410, 51, 31))
@@ -111,7 +111,7 @@ class Ui_MainWindow(object):
         self.pushButton_32.setGeometry(QtCore.QRect(360, 470, 51, 31))
         self.pushButton_32.setObjectName("pushButton_32")
         self.pushButton_33 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_33.setGeometry(QtCore.QRect(500, 440, 51, 31))
+        self.pushButton_33.setGeometry(QtCore.QRect(500, 440, 90, 90))
         self.pushButton_33.setObjectName("pushButton_33")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(540, 220, 93, 28))
@@ -172,13 +172,3 @@ class Ui_MainWindow(object):
         self.pushButton.setText(_translate("MainWindow", "PushButton"))
         self.pushButton_34.setText(_translate("MainWindow", ".,"))
         self.label.setText(_translate("MainWindow", "TextLabel"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
