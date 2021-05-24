@@ -1,0 +1,1 @@
+pyuic5 -x recordtable.ui -o recordtable.py

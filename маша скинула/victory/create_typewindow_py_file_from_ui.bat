@@ -1,0 +1,1 @@
+pyuic5 -x typewindow.ui -o typewindow.py
