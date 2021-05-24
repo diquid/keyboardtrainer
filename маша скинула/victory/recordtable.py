@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from menu import *
 
 
 class Ui_MainWindow2(object):
@@ -17,18 +18,30 @@ class Ui_MainWindow2(object):
         MainWindow.resize(1000, 700)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(250, 0, 471, 91))
         font = QtGui.QFont()
-        font.setFamily("Century Gothic")
+        font.setFamily("Courier New")
         font.setPointSize(28)
         self.label.setFont(font)
         self.label.setObjectName("label")
+
+        self.returntomenu = QtWidgets.QPushButton(self.centralwidget)
+        self.returntomenu.setGeometry(QtCore.QRect(350, 590, 281, 31))
+        font = QtGui.QFont()
+        font.setFamily("Courier New")
+        font.setPointSize(10)
+        self.returntomenu.setFont(font)
+        self.returntomenu.setObjectName("returntomenu")
+        #self.returntomenu.clicked.connect(menu)
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1000, 26))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
+
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
@@ -40,13 +53,14 @@ class Ui_MainWindow2(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "Таблица рекордов"))
+        self.returntomenu.setText(_translate("MainWindow", "Выход в главное меню"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow2()
-    ui.setup2(MainWindow)
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())

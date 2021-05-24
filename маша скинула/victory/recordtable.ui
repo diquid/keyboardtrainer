@@ -25,12 +25,31 @@
     </property>
     <property name="font">
      <font>
-      <family>Century Gothic</family>
+      <family>Courier New</family>
       <pointsize>28</pointsize>
      </font>
     </property>
     <property name="text">
      <string>Таблица рекордов</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>590</y>
+      <width>281</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Courier New</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Выход в главное меню</string>
     </property>
    </widget>
   </widget>
