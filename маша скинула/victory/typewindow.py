@@ -9,69 +9,176 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import random
+import time
+import os
+from shutil import get_terminal_size
+import sys
+sys.path.append(r'c:\python38\lib\site-packages')
+import keyboard
+import difflib as df
+from aftertype import *
+from operator import itemgetter
+import pickle
 
 class Ui_MainWindow1(object):
-    def setup(self, MainWindow):
+
+    def aftertype(self):
+        self.Dialog = QtWidgets.QDialog()
+        self.ui = Ui_Dialog3()
+        self.ui.setup3(self.Dialog)
+        self.Dialog.show()
+
+    def twofuncstart(self):
+        self.textread()
+        #self.settimer()
+
+    def textread(self):
+        with open('baza.txt') as f:
+            line_count = 0
+            for line in f:
+                line_count += 1
+        random1 = random.randint(1, line_count)
+        textf = open('baza.txt').readlines()
+        length_textf = len(textf)
+        refline = textf[random1 - 1]
+        self.textEdit_2.setText(refline)
+        self.pushButton.setEnabled(False)
+
+    def settimer(self):
+        time1 = time.time()
+        #while (self.Dialog.hasFocus() == false):
+        #    time2 = time.time()
+        #    self.total_time = time1 - time2
+        self.label_5.setText("Прошло времени:" + str(time1))
+
+    def saveresults(self):
+        tableresults.append()
+        tableresults = [null] * 11
+        tableresults = sorted(tableresults, key = itemgetter(1), reverse=True)[:10]
+
+        with open('results.txt') as findresults:
+            pickle.load(findresults)
+        tableresults = sorted(tableresults, key = itemgetter(1), reverse=True)[:10]
+
+    def errorscount(self):
+        time1 = time.time()
+        time2 = 0
+        refline = self.textEdit_2.toPlainText()
+        typedline = self.textEdit.toPlainText()
+        errors = 0
+        index = 0
+        typespeed = 0
+        for i in typedline:
+            try:
+                if (index == len(refline)-1): 
+                    time2 = time.time()
+                if (refline[index] != typedline[index]):
+                    errors += 1
+                #if (refline[index + 1] != typedline[index + 1]):
+                #    self.textEdit.setTextColor(QtGui.QColor("red"))
+                #elif (refline[index + 1] == typedline[index + 1]):
+                #    self.textEdit.setTextColor(QtGui.QColor("black"))
+                index += 1
+                totaltime = time2 - time1
+                if (totaltime > 0):
+                    typespeed = (len(typedline) - errors)/totaltime
+                elif (totaltime < 0):
+                    totaltime = totaltime * (-1)
+                    typespeed = (len(typedline) - errors)/totaltime
+            except IndexError as e:
+                self.aftertype()
+        self.label_3.setText("Количество ошибок: " + str(errors))
+        self.label_4.setText("Скорость набора:" + str(typespeed))
+        self.label_5.setText("Прошло времени:" + str(totaltime))
+
+
+    def setup1(self, MainWindow):
+        #refline = self.textread()
+
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1000, 740)
+        MainWindow.resize(1000, 830)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
         self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
-        self.textEdit.setGeometry(QtCore.QRect(20, 270, 961, 201))
-        self.textEdit.setObjectName("textEdit")
+        self.textEdit.setGeometry(QtCore.QRect(20, 330, 961, 201))
+        self.textEdit.setObjectName("textEdit") #ввод
+        self.textEdit.textChanged.connect(self.errorscount)
+
         self.textEdit_2 = QtWidgets.QTextEdit(self.centralwidget)
         self.textEdit_2.setGeometry(QtCore.QRect(20, 10, 961, 201))
-        self.textEdit_2.setObjectName("textEdit_2")
+        self.textEdit_2.setObjectName("textEdit_2") #текст
+        
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(20, 240, 311, 21))
+        self.label.setGeometry(QtCore.QRect(20, 300, 311, 21))
         font = QtGui.QFont()
         font.setFamily("Courier New")
         font.setPointSize(12)
         self.label.setFont(font)
         self.label.setObjectName("label")
+
         self.line = QtWidgets.QFrame(self.centralwidget)
-        self.line.setGeometry(QtCore.QRect(20, 220, 961, 16))
+        self.line.setGeometry(QtCore.QRect(20, 280, 961, 16))
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
+
         self.line_2 = QtWidgets.QFrame(self.centralwidget)
-        self.line_2.setGeometry(QtCore.QRect(20, 480, 961, 16))
+        self.line_2.setGeometry(QtCore.QRect(20, 540, 961, 16))
         self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
         self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_2.setObjectName("line_2")
+
         self.progressBar = QtWidgets.QProgressBar(self.centralwidget)
-        self.progressBar.setGeometry(QtCore.QRect(20, 530, 951, 23))
+        self.progressBar.setGeometry(QtCore.QRect(20, 590, 951, 23))
         self.progressBar.setProperty("value", 24)
         self.progressBar.setObjectName("progressBar")
+
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(20, 500, 191, 21))
+        self.label_2.setGeometry(QtCore.QRect(20, 560, 191, 21))
         font = QtGui.QFont()
         font.setFamily("Courier New")
         font.setPointSize(12)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
+
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(120, 570, 211, 31))
+        self.label_3.setGeometry(QtCore.QRect(120, 630, 500, 31))
         font = QtGui.QFont()
         font.setFamily("Courier New")
         font.setPointSize(12)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
+
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(400, 570, 211, 31))
+        self.label_4.setGeometry(QtCore.QRect(400, 630, 250, 31))
         font = QtGui.QFont()
         font.setFamily("Courier New")
         font.setPointSize(12)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
+
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
-        self.label_5.setGeometry(QtCore.QRect(650, 570, 211, 31))
+        self.label_5.setGeometry(QtCore.QRect(650, 630, 250, 31))
         font = QtGui.QFont()
         font.setFamily("Courier New")
         font.setPointSize(12)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
+
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(350, 230, 281, 41))
+        font = QtGui.QFont()
+        font.setFamily("Courier New")
+        font.setPointSize(12)
+        self.pushButton.setFont(font)
+        self.pushButton.setObjectName("pushButton")
+        self.pushButton.clicked.connect(self.twofuncstart)  
+        #self.pushButton.clicked.connect(lambda: self.textEdit_2.append(refline))        
+        #self.pushButton.setEnabled(False)
+
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1000, 26))
@@ -92,13 +199,13 @@ class Ui_MainWindow1(object):
         self.label_3.setText(_translate("MainWindow", "Количество ошибок:"))
         self.label_4.setText(_translate("MainWindow", "Скорость набора:"))
         self.label_5.setText(_translate("MainWindow", "Прошло времени:"))
-
+        self.pushButton.setText(_translate("MainWindow", "Показать текст"))
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
+    ui = Ui_MainWindow1()
+    ui.setup1(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())

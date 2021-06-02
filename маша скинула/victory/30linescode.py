@@ -21,12 +21,12 @@ print(a)
 time1 = time.time()
 for i in a:
     #print("\n" * get_terminal_size().lines, end='')
-key = keyboard.read_key()
-if key == "space":    
-    s = " "
-else:
-    s = key
-print(s, end = "")
+    key = keyboard.read_key()
+    if key == "space":
+        s = " "
+    else:
+        s = key
+    print(s, end = "")
 time2 = time.time()
 print(time2 - time1)
 print(len_a/(time2 - time1))

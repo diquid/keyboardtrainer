@@ -10,10 +10,18 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from menu import *
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLineEdit, QPushButton
+from PyQt5.QtGui import QIcon
 
+class Ui_MainWindow4(object):
 
-class Ui_MainWindow2(object):
-    def setup2(self, MainWindow):
+    def menu(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def setup4(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1000, 700)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -34,7 +42,7 @@ class Ui_MainWindow2(object):
         font.setPointSize(10)
         self.returntomenu.setFont(font)
         self.returntomenu.setObjectName("returntomenu")
-        #self.returntomenu.clicked.connect(menu)
+        self.returntomenu.clicked.connect(self.menu)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -60,7 +68,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
+    ui = Ui_MainWindow4()
+    ui.setup4(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())

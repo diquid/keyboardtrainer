@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1000</width>
-    <height>740</height>
+    <height>830</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>270</y>
+      <y>330</y>
       <width>961</width>
       <height>201</height>
      </rect>
@@ -38,7 +38,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>240</y>
+      <y>300</y>
       <width>311</width>
       <height>21</height>
      </rect>
@@ -57,7 +57,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>220</y>
+      <y>280</y>
       <width>961</width>
       <height>16</height>
      </rect>
@@ -70,7 +70,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>480</y>
+      <y>540</y>
       <width>961</width>
       <height>16</height>
      </rect>
@@ -83,7 +83,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>530</y>
+      <y>590</y>
       <width>951</width>
       <height>23</height>
      </rect>
@@ -96,7 +96,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>500</y>
+      <y>560</y>
       <width>191</width>
       <height>21</height>
      </rect>
@@ -115,7 +115,7 @@
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>570</y>
+      <y>630</y>
       <width>211</width>
       <height>31</height>
      </rect>
@@ -134,7 +134,7 @@
     <property name="geometry">
      <rect>
       <x>400</x>
-      <y>570</y>
+      <y>630</y>
       <width>211</width>
       <height>31</height>
      </rect>
@@ -153,7 +153,7 @@
     <property name="geometry">
      <rect>
       <x>650</x>
-      <y>570</y>
+      <y>630</y>
       <width>211</width>
       <height>31</height>
      </rect>
@@ -166,6 +166,25 @@
     </property>
     <property name="text">
      <string>Прошло времени:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>230</y>
+      <width>281</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Courier New</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Показать текст</string>
     </property>
    </widget>
   </widget>

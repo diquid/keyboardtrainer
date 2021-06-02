@@ -9,10 +9,32 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from typewindow import *
+from menu import *
+from recordtable import *
 
+class Ui_Dialog3(object):
 
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
+    def start(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_MainWindow1()
+        self.ui.setup1(self.window)
+        self.window.show()
+
+    def records(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_MainWindow4()
+        self.ui.setup4(self.window)
+        self.window.show()
+
+    def menu(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def setup3(self, Dialog):
+
         Dialog.setObjectName("Dialog")
         Dialog.resize(710, 539)
         self.pushButton = QtWidgets.QPushButton(Dialog)
@@ -21,28 +43,36 @@ class Ui_Dialog(object):
         font.setFamily("Courier New")
         font.setPointSize(10)
         self.pushButton.setFont(font)
-        self.pushButton.setObjectName("pushButton")
+        self.pushButton.setObjectName("pushButton") #Посмотреть результат в таблице рекордов
+        self.pushButton.clicked.connect(self.records)
+
         self.pushButton_2 = QtWidgets.QPushButton(Dialog)
         self.pushButton_2.setGeometry(QtCore.QRect(210, 400, 291, 28))
         font = QtGui.QFont()
         font.setFamily("Courier New")
         font.setPointSize(10)
         self.pushButton_2.setFont(font)
-        self.pushButton_2.setObjectName("pushButton_2")
+        self.pushButton_2.setObjectName("pushButton_2") #Попробовать еще раз
+        self.pushButton_2.clicked.connect(self.start)
+
         self.pushButton_3 = QtWidgets.QPushButton(Dialog)
         self.pushButton_3.setGeometry(QtCore.QRect(210, 440, 291, 28))
         font = QtGui.QFont()
         font.setFamily("Courier New")
         font.setPointSize(10)
         self.pushButton_3.setFont(font)
-        self.pushButton_3.setObjectName("pushButton_3")
+        self.pushButton_3.setObjectName("pushButton_3") #Выход в главное меню
+        self.pushButton_3.clicked.connect(self.menu)
+
         self.pushButton_4 = QtWidgets.QPushButton(Dialog)
         self.pushButton_4.setGeometry(QtCore.QRect(210, 480, 291, 28))
         font = QtGui.QFont()
         font.setFamily("Courier New")
         font.setPointSize(10)
         self.pushButton_4.setFont(font)
-        self.pushButton_4.setObjectName("pushButton_4")
+        self.pushButton_4.setObjectName("pushButton_4") #Выход из приложения
+        self.pushButton_4.clicked.connect(quit)
+
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(190, 10, 311, 71))
         font = QtGui.QFont()
@@ -50,40 +80,46 @@ class Ui_Dialog(object):
         font.setPointSize(16)
         self.label.setFont(font)
         self.label.setObjectName("label")
+
         self.label_2 = QtWidgets.QLabel(Dialog)
         self.label_2.setGeometry(QtCore.QRect(40, 100, 311, 41))
         font = QtGui.QFont()
         font.setFamily("Courier New")
         font.setPointSize(12)
         self.label_2.setFont(font)
-        self.label_2.setObjectName("label_2")
+        self.label_2.setObjectName("label_2") #Средняя скорость
+
         self.label_3 = QtWidgets.QLabel(Dialog)
         self.label_3.setGeometry(QtCore.QRect(40, 160, 311, 41))
         font = QtGui.QFont()
         font.setFamily("Courier New")
         font.setPointSize(12)
         self.label_3.setFont(font)
-        self.label_3.setObjectName("label_3")
+        self.label_3.setObjectName("label_3") #Ошибки
+
         self.label_4 = QtWidgets.QLabel(Dialog)
         self.label_4.setGeometry(QtCore.QRect(40, 220, 311, 41))
         font = QtGui.QFont()
         font.setFamily("Courier New")
         font.setPointSize(12)
         self.label_4.setFont(font)
-        self.label_4.setObjectName("label_4")
+        self.label_4.setObjectName("label_4") #Время
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
+        speed = self.
+        errors = 
+        totaltime =
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.pushButton.setText(_translate("Dialog", "Сохранить результат в таблицу рекордов"))
+        self.pushButton.setText(_translate("Dialog", "Посмотреть результат в таблице рекордов"))
         self.pushButton_2.setText(_translate("Dialog", "Попробовать еще раз"))
         self.pushButton_3.setText(_translate("Dialog", "Выход в главное меню"))
         self.pushButton_4.setText(_translate("Dialog", "Выход из приложения"))
         self.label.setText(_translate("Dialog", "Отличный результат!"))
-        self.label_2.setText(_translate("Dialog", "Средняя скорость набора:"))
+        self.label_2.setText("Средняя скорость набора:")
         self.label_3.setText(_translate("Dialog", "Количество ошибок:"))
         self.label_4.setText(_translate("Dialog", "Время:"))
 
@@ -92,7 +128,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
+    ui = Ui_Dialog3()
+    ui.setup3(Dialog)
     Dialog.show()
     sys.exit(app.exec_())

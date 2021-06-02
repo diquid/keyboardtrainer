@@ -17,12 +17,12 @@
    <enum>QTabWidget::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="start">
+   <widget class="QPushButton" name="startbutton">
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>310</x>
       <y>210</y>
-      <width>301</width>
+      <width>351</width>
       <height>71</height>
      </rect>
     </property>
@@ -92,8 +92,8 @@
     </property>
     <property name="font">
      <font>
-      <family>Century Gothic</family>
-      <pointsize>14</pointsize>
+      <family>Courier New</family>
+      <pointsize>20</pointsize>
      </font>
     </property>
     <property name="text">
@@ -103,16 +103,16 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>230</x>
       <y>20</y>
-      <width>461</width>
+      <width>511</width>
       <height>81</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Century Gothic</family>
-      <pointsize>28</pointsize>
+      <family>Courier New</family>
+      <pointsize>32</pointsize>
       <weight>50</weight>
       <bold>false</bold>
      </font>
@@ -125,14 +125,14 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>70</y>
-      <width>631</width>
+      <y>80</y>
+      <width>651</width>
       <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Century Gothic</family>
+      <family>Courier New</family>
       <pointsize>28</pointsize>
       <weight>50</weight>
       <bold>false</bold>
@@ -142,38 +142,38 @@
      <string>в клавиатурный тренажер!</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="start_2">
+   <widget class="QPushButton" name="recordtablebutton">
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>310</x>
       <y>300</y>
-      <width>301</width>
+      <width>351</width>
       <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Century Gothic</family>
-      <pointsize>14</pointsize>
+      <family>Courier New</family>
+      <pointsize>20</pointsize>
      </font>
     </property>
     <property name="text">
      <string>Таблица рекордов</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="start_3">
+   <widget class="QPushButton" name="exitbutton">
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>310</x>
       <y>390</y>
-      <width>301</width>
+      <width>351</width>
       <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Century Gothic</family>
-      <pointsize>14</pointsize>
+      <family>Courier New</family>
+      <pointsize>20</pointsize>
      </font>
     </property>
     <property name="text">
