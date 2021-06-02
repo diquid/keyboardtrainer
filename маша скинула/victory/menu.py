@@ -9,7 +9,8 @@
 
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-from typewindow import *
+import typewindow
+#from typewindow import *
 from recordtable import *
 from textread import *
 from aftertype import *
@@ -20,7 +21,7 @@ class Ui_MainWindow(object):
 
     def start(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_MainWindow1()
+        self.ui = typewindow.Ui_MainWindow1()
         self.ui.setup1(self.window)
         self.window.show()
 

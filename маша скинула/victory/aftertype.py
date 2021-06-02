@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from typewindow import *
+import typewindow
 from menu import *
 from recordtable import *
 
@@ -17,7 +17,7 @@ class Ui_Dialog3(object):
 
     def start(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_MainWindow1()
+        self.ui = typewindow.Ui_MainWindow1()
         self.ui.setup1(self.window)
         self.window.show()
 
@@ -109,9 +109,9 @@ class Ui_Dialog3(object):
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
-        speed = self.
-        errors = 
-        totaltime =
+        #speed = self.
+        #errors = 
+        #totaltime =
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.pushButton.setText(_translate("Dialog", "Посмотреть результат в таблице рекордов"))
@@ -119,9 +119,9 @@ class Ui_Dialog3(object):
         self.pushButton_3.setText(_translate("Dialog", "Выход в главное меню"))
         self.pushButton_4.setText(_translate("Dialog", "Выход из приложения"))
         self.label.setText(_translate("Dialog", "Отличный результат!"))
-        self.label_2.setText("Средняя скорость набора:")
-        self.label_3.setText(_translate("Dialog", "Количество ошибок:"))
-        self.label_4.setText(_translate("Dialog", "Время:"))
+        self.label_2.setText("Средняя скорость набора:") #+ str(typespeed))
+        self.label_3.setText("Количество ошибок:") #+ str(errors))
+        self.label_4.setText("Время:") #+ str(time1))
 
 
 if __name__ == "__main__":

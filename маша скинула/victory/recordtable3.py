@@ -9,20 +9,11 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from menu import *
-from save import *
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLineEdit, QPushButton
-from PyQt5.QtGui import QIcon
 
-class Ui_MainWindow4(object):
 
-    def menu(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self.window)
-        self.window.show()
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
 
-    def setup4(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1000, 700)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -36,14 +27,13 @@ class Ui_MainWindow4(object):
         self.label.setFont(font)
         self.label.setObjectName("label")
 
-        self.returntomenu = QtWidgets.QPushButton(self.centralwidget)
-        self.returntomenu.setGeometry(QtCore.QRect(350, 590, 281, 31))
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(350, 590, 281, 31))
         font = QtGui.QFont()
         font.setFamily("Courier New")
         font.setPointSize(10)
-        self.returntomenu.setFont(font)
-        self.returntomenu.setObjectName("returntomenu")
-        self.returntomenu.clicked.connect(self.menu)
+        self.pushButton.setFont(font)
+        self.pushButton.setObjectName("pushButton")
 
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setGeometry(QtCore.QRect(280, 110, 411, 411))
@@ -78,12 +68,10 @@ class Ui_MainWindow4(object):
         self.tableWidget.setHorizontalHeaderItem(2, item)
         MainWindow.setCentralWidget(self.centralwidget)
 
-        MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1000, 26))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
-
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
@@ -95,7 +83,7 @@ class Ui_MainWindow4(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "Таблица рекордов"))
-        self.returntomenu.setText(_translate("MainWindow", "Выход в главное меню"))
+        self.pushButton.setText(_translate("MainWindow", "Выход в главное меню"))
         item = self.tableWidget.verticalHeaderItem(0)
         item.setText(_translate("MainWindow", "1"))
         item = self.tableWidget.verticalHeaderItem(1)
@@ -128,7 +116,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow4()
-    ui.setup4(MainWindow)
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
