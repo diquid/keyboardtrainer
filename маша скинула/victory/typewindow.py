@@ -11,22 +11,17 @@
 # фоновая музыка
 # картинки котиков
 
-
 # считывание файлов, сравнение символов, проверка таблицы рекордов
 
-
-
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtMultimedia
+from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent, QSound
+from PyQt5.QtCore import QUrl
 import random
 import time
 import datetime
 import os
 from shutil import get_terminal_size
-import sys
-sys.path.append(r'c:\python38\lib\site-packages')
-import keyboard
 import difflib as df
 from aftertype import *
 from timer import *
@@ -37,11 +32,9 @@ import pickle
 
 class Ui_MainWindow1(object): 
 
-    def  __init__(self):
+    def __init__(self):
         super().__init__()
-        self.timer = QtCore.QTimer()
-        self.timer.setInterval(1000)
-        self.timer.timeout.connect(timer_handler)
+        self.elapsed_timer = QtCore.QElapsedTimer()
 
     def aftertype(self):
         self.Dialog = QtWidgets.QDialog()
@@ -49,14 +42,20 @@ class Ui_MainWindow1(object):
         self.ui.setup3(self.Dialog)
         self.Dialog.show()
 
+    def play(self):
+        self.player.play()
+
+    def pause(self):
+        self.player.pause()
+
     def funcstart(self):
         self.textread()
         self.settimer()
         self.speedcount()
 
-    def timer(self):
-        time = time.addSecs()
-        return (time.toString("hh:mm:ss"))
+    #def timer(self):
+    #    time1 = time.addSecs()
+    #    return (time1.toString("hh:mm:ss"))
 
     def speedcount(self):
         time1 = time.time()
@@ -78,8 +77,10 @@ class Ui_MainWindow1(object):
         self.pushButton.setEnabled(False)
 
     def settimer(self):
-        time1 = time.time()
-        self.label_5.setText("Прошло времени:" + str(time1))
+        self.elapsed_timer.start()
+
+    def show_timer_text(self):
+        self.label_5.setText("Прошло времени:")
 
     def saveresults(self):
         tableresults.append()
@@ -226,6 +227,27 @@ class Ui_MainWindow1(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
+
+        self.playbutton = QtWidgets.QPushButton(self.centralwidget)
+        self.playbutton.setGeometry(QtCore.QRect(830, 700, 50, 50))
+        font = QtGui.QFont()
+        font.setFamily("Courier New")
+        font.setPointSize(14)
+        self.playbutton.setFont(font)
+        self.playbutton.setObjectName("playbutton")
+        self.playbutton.clicked.connect(self.play)
+
+
+        self.pausebutton = QtWidgets.QPushButton(self.centralwidget)
+        self.pausebutton.setGeometry(QtCore.QRect(900, 700, 50, 50))
+        font = QtGui.QFont()
+        font.setFamily("Courier New")
+        font.setPointSize(14)
+        self.pausebutton.setFont(font)
+        self.pausebutton.setObjectName("pausebutton")
+        self.pausebutton.clicked.connect(self.pause)
+
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -238,9 +260,11 @@ class Ui_MainWindow1(object):
         self.label_4.setText(_translate("MainWindow", "Скорость набора:"))
         self.label_5.setText(_translate("MainWindow", "Прошло времени:"))
         self.pushButton.setText(_translate("MainWindow", "Показать текст"))
+        self.playbutton.setText(_translate("MainWindow", "►"))
+        self.pausebutton.setText(_translate("MainWindow", "◼"))
+
 
 if __name__ == "__main__":
-    import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow1()

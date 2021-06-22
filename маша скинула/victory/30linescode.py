@@ -1,5 +1,4 @@
 import sys
-sys.path.append(r'c:\python38\lib\site-packages')
 import keyboard
 import random
 import time

@@ -8,15 +8,14 @@ from recordtable import *
 
 
 def timer_handler():
-        global time
         time = time.addSecs(1)
-        print(time.toString("hh:mm:ss"))
+        print(time.toString("mm:ss"))
+
 
 if __name__ == "__main__":
-    import sys
     app = QtCore.QCoreApplication(sys.argv)
     timer = QtCore.QTimer()
-    time = QtCore.QTime(0, 0, 0)
+    elapsed_time = QtCore.QTime(0, 0, 0)
     timer.setInterval(1000)
     timer.timeout.connect(timer_handler)
     timer.start()

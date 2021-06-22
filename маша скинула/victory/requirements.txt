@@ -1,0 +1,4 @@
+PyQt5==5.15.4
+keyboard==0.13.5
+pyqt5-tools==5.15.4.3.2
+PyQt5-stubs==5.15.2.0

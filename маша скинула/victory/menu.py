@@ -37,6 +37,12 @@ class Ui_MainWindow(object):
         self.ui.setupUi(self.window)
         self.window.show()
 
+    def play(self):
+        self.player.play()
+
+    def pause(self):
+        self.player.pause()
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1000, 700)
@@ -115,6 +121,26 @@ class Ui_MainWindow(object):
         self.exitbutton.clicked.connect(quit)
 
 
+        self.playbutton = QtWidgets.QPushButton(self.centralwidget)
+        self.playbutton.setGeometry(QtCore.QRect(830, 600, 50, 50))
+        font = QtGui.QFont()
+        font.setFamily("Courier New")
+        font.setPointSize(14)
+        self.playbutton.setFont(font)
+        self.playbutton.setObjectName("playbutton")
+        self.playbutton.clicked.connect(self.play)
+
+
+        self.pausebutton = QtWidgets.QPushButton(self.centralwidget)
+        self.pausebutton.setGeometry(QtCore.QRect(900, 600, 50, 50))
+        font = QtGui.QFont()
+        font.setFamily("Courier New")
+        font.setPointSize(14)
+        self.pausebutton.setFont(font)
+        self.pausebutton.setObjectName("pausebutton")
+        self.pausebutton.clicked.connect(self.pause)
+
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1000, 26))
@@ -137,16 +163,18 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "в клавиатурный тренажер!"))
         self.recordsbutton.setText(_translate("MainWindow", "Таблица рекордов"))
         self.exitbutton.setText(_translate("MainWindow", "Выход"))
+        self.playbutton.setText(_translate("MainWindow", "►"))
+        self.pausebutton.setText(_translate("MainWindow", "◼"))
 
-    def quit():
+    def quit(self):
         sys.exit()
 
 
-    if __name__ == "__main__":
-        import sys
-        app = QtWidgets.QApplication(sys.argv)
-        MainWindow = QtWidgets.QMainWindow()
-        ui = Ui_MainWindow()
-        ui.setupUi(MainWindow)
-        MainWindow.show()
-        sys.exit(app.exec_())
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
