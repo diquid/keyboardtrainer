@@ -32,22 +32,23 @@ from save import *
 from recordtable import *
 from operator import itemgetter
 import pickle
+from editor import TextEditor
 
-class DummyThread(QThread):
-    finished = pyqtSignal()
-    def run(self):
-        time.sleep(1)
-        self.finished.emit()
-
-class Example(QWidget):
-    [...]
-    def changeLabels(self):
-        for lbl in self.labels:
-            orgTxt = lbl.text()
-            lbl.setText("%s Running" % orgTxt)
-            thread = DummyThread(self)
-            thread.start()
-            thread.finished.connect(lambda txt=orgTxt, lbl=lbl : lbl.setText("%s Done" % txt))
+# class DummyThread(QThread):
+#     finished = pyqtSignal()
+#     def run(self):
+#         time.sleep(1)
+#         self.finished.emit()
+#
+# class Example(QWidget):
+#     [...]
+#     def changeLabels(self):
+#         for lbl in self.labels:
+#             orgTxt = lbl.text()
+#             lbl.setText("%s Running" % orgTxt)
+#             thread = DummyThread(self)
+#             thread.start()
+#             thread.finished.connect(lambda txt=orgTxt, lbl=lbl : lbl.setText("%s Done" % txt))
 
 class Ui_MainWindow1(object): 
 
@@ -61,11 +62,16 @@ class Ui_MainWindow1(object):
         self.ui.setup3(self.Dialog)
         self.Dialog.show()
 
-    #def play(self):
-    #    self.player.play()
+    def play(self):
+        playsound('SLAVA_MARLOW_-_Snova_ya_napivayus.mp3')
+        # winsound.PlaySound(r'SLAVA_MARLOW_-_Snova_ya_napivayus.mp3', winsound.SND_ASYNC)
+        # thread1 = Thread(target=playsound, args=("SLAVA_MARLOW_-_Snova_ya_napivayus.mp3.mp3",))
+        # thread1.start()
+        # thread1.join()
+        # input("press ENTER to stop playback")
 
-    #def pause(self):
-    #    self.player.pause()
+    def pause(self):
+        playsound('SLAVA_MARLOW_-_Snova_ya_napivayus.mp3')
 
     def funcstart(self):
         self.textread()
@@ -94,12 +100,17 @@ class Ui_MainWindow1(object):
         refline = textf[random1 - 1]
         self.textEdit_2.setText(refline)
         self.pushButton.setEnabled(False)
+        self.textEdit.set_ref_text(refline)
 
     def settimer(self):
-        self.elapsed_timer.start()
+        start_time = time.time()
+        #self.elapsed_timer.start()
 
     def show_timer_text(self):
         self.label_5.setText("Прошло времени:")
+
+    def clean(self):
+        symbol = self.textEdit.toPlainText()
 
     def saveresults(self):
         tableresults.append()
@@ -111,44 +122,43 @@ class Ui_MainWindow1(object):
         tableresults = sorted(tableresults, key = itemgetter(1), reverse=True)[:10]
 
     def errorscount(self):
-        time1 = time.time()
-        time2 = 0
         refline = self.textEdit_2.toPlainText()
         typedline = self.textEdit.toPlainText()
+        current_index = len(typedline)-1
         errors = 0
         index = 0
-        typespeed = 0
-        totaltime = 0
-        current_text =""
-        current_symbol = ""
+        # if len(typedline) == 1:
+        #     if typedline[0] == refline[0]:
+        #         self.textEdit.setTextColor(QtGui.QColor("green"))
+        #         self.textEdit.setText(typedline)
+        #     else:
+        #         self.textEdit.setTextColor(QtGui.QColor("red"))
+        #         self.textEdit.setText(typedline)
+        #         errors += 1
         for i in typedline:
             try:
-                if (index == len(refline)-1): 
-                    time2 = time.time()
-                if ((refline[index] != typedline[index])):
+                if refline[index] != i:
                     errors += 1
-                    #current_symbol =  typedline[index]
-                    #self.editor.setStyleSheet("QTextEdit {color:red}")
-                    #current_text = self.textEdit_2.toPlainText()
-                    #previous_html = self.textEdit_2.toHtml()
-                    self.textEdit.setTextColor( QtGui.QColor("red"))
-                else: 
-                    #self.textEdit.setText('')
-                    self.textEdit.setTextColor( QtGui.QColor("green"))
-                    #self.textEdit_2.append( current_text)
+                    #self.textEdit.setTextColor(QtGui.QColor("red"))
+                    self.textEdit.setStyleSheet("QTextEdit {color: red}")
+                else:
+                    #self.textEdit.setTextColor(QtGui.QColor("green"))
+                    self.textEdit.setStyleSheet("QTextEdit {color: green}")
+
                 index += 1
-                totaltime = time2 - time1
-                if (totaltime > 0):
-                    typespeed = (len(typedline) - errors)/totaltime
-                elif (totaltime < 0):
-                    totaltime = totaltime * (-1)
-                    typespeed = (len(typedline) - errors)/totaltime
+                # if typedline[current_index] != refline[current_index]:
+                #     self.textEdit.setTextColor(QtGui.QColor("red"))
+                #     self.textEdit.setText(typedline)
+                #     errors += 1
+                # else:
+                #     self.textEdit.setTextColor(QtGui.QColor("green"))
+                #     typedline = self.textEdit.toPlainText()
+                #     self.textEdit.setText(typedline)
             except IndexError as e:
                 self.aftertype()
-                time2 = time.time()
         self.label_3.setText("Количество ошибок: " + str(errors))
         #self.label_4.setText("Скорость набора:" + str(typespeed))
-        self.label_5.setText("Прошло времени:" + str(totaltime))
+        self.label_5.setText("Прошло времени:")# + str(totaltime))
 
 
     def setup1(self, MainWindow):
@@ -158,15 +168,16 @@ class Ui_MainWindow1(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
-        self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
-        self.textEdit.setGeometry(QtCore.QRect(20, 330, 961, 201))
-        self.textEdit.setObjectName("textEdit") #ввод
-        self.textEdit.textChanged.connect(self.errorscount)
-
         self.textEdit_2 = QtWidgets.QTextEdit(self.centralwidget)
         self.textEdit_2.setGeometry(QtCore.QRect(20, 10, 961, 201))
-        self.textEdit_2.setObjectName("textEdit_2") #текст
-        
+        self.textEdit_2.setObjectName("textEdit_2")  # текст
+
+        self.textEdit = TextEditor(self.centralwidget, self.textEdit_2.toPlainText())
+        self.textEdit.setGeometry(QtCore.QRect(20, 330, 961, 201))
+        self.textEdit.setObjectName("textEdit") #ввод
+        #self.textEdit.textChanged.connect(self.errorscount)
+
+
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(20, 300, 311, 21))
         font = QtGui.QFont()

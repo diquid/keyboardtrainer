@@ -17,7 +17,60 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QLineEdit, QPushButton, Q
 from PyQt5.QtGui import QIcon, QPixmap
 from playsound import playsound
 import multiprocessing
-#import vlc
+from threading import Thread
+
+
+# paused = False    # global to track if the audio is paused
+# def on_press(key):
+#     global paused
+#     print (key)
+#     if key == keyboard.Key.space:
+#         if stream.is_stopped():     # time to play audio
+#             print ('play pressed')
+#             stream.start_stream()
+#             paused = False
+#             return False
+#         elif stream.is_active():   # time to pause audio
+#             print ('pause pressed')
+#             stream.stop_stream()
+#             paused = True
+#             return False
+#     return False
+#
+#
+# # you audio here
+# wf = open('SLAVA_MARLOW_-_Snova_ya_napivayus.mp3', 'rb')
+#
+# # instantiate PyAudio
+# p = pyaudio.PyAudio()
+#
+# # define callback
+# def callback(in_data, frame_count, time_info, status):
+#     data = wf.readframes(frame_count)
+#     return (data, pyaudio.paContinue)
+#
+# # open stream using callback
+# stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
+#                 channels=wf.getnchannels(),
+#                 rate=wf.getframerate(),
+#                 output=True,
+#                 stream_callback=callback)
+#
+# # start the stream
+# stream.start_stream()
+#
+# while stream.is_active() or paused==True:
+#     with keyboard.Listener(on_press=on_press) as listener:
+#         listener.join()
+#     time.sleep(0.1)
+#
+# # stop stream
+# stream.stop_stream()
+# stream.close()
+# wf.close()
+#
+# # close PyAudio
+# p.terminate()
 
 #playsound('SLAVA_MARLOW_-_Snova_ya_napivayus.mp3')
 
@@ -44,6 +97,11 @@ class Ui_MainWindow(object):
 
     def play(self):
         playsound('SLAVA_MARLOW_-_Snova_ya_napivayus.mp3')
+        #winsound.PlaySound(r'SLAVA_MARLOW_-_Snova_ya_napivayus.mp3', winsound.SND_ASYNC)
+        #thread1 = Thread(target=playsound, args=("SLAVA_MARLOW_-_Snova_ya_napivayus.mp3.mp3",))
+        #thread1.start()
+        #thread1.join()
+        #input("press ENTER to stop playback")
 
     def pause(self):
         playsound('SLAVA_MARLOW_-_Snova_ya_napivayus.mp3')
@@ -80,6 +138,18 @@ class Ui_MainWindow(object):
         #lbl.setPixmap(pixmap)
         #hbox.addWidget(lbl)
         #self.setLayout(hbox)
+
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        pixmap = QPixmap('20pic.png')
+        self.label_3.setPixmap(pixmap)
+        self.label_3.setObjectName("label_3")
+        self.label_3.move(150, 360)
+
+        self.label_4 = QtWidgets.QLabel(self.centralwidget)
+        pixmap = QPixmap('30pic.png')
+        self.label_4.setPixmap(pixmap)
+        self.label_4.setObjectName("label_3")
+        self.label_4.move(670, 300)
 
 
         self.startbutton.setPalette(palette)
