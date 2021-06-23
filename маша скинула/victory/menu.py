@@ -10,12 +10,17 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 import typewindow
-#from typewindow import *
 from recordtable import *
 from textread import *
 from aftertype import *
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLineEdit, QPushButton
-from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLineEdit, QPushButton, QHBoxLayout, QLabel
+from PyQt5.QtGui import QIcon, QPixmap
+from playsound import playsound
+import multiprocessing
+#import vlc
+
+#playsound('SLAVA_MARLOW_-_Snova_ya_napivayus.mp3')
+
 
 class Ui_MainWindow(object):
 
@@ -38,10 +43,10 @@ class Ui_MainWindow(object):
         self.window.show()
 
     def play(self):
-        self.player.play()
+        playsound('SLAVA_MARLOW_-_Snova_ya_napivayus.mp3')
 
     def pause(self):
-        self.player.pause()
+        playsound('SLAVA_MARLOW_-_Snova_ya_napivayus.mp3')
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -69,6 +74,12 @@ class Ui_MainWindow(object):
         brush = QtGui.QBrush(QtGui.QColor(170, 170, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Light, brush)
+        #hbox = QHBoxLayout(self)
+        #pixmap = QPixmap("1pic.jpg")
+        #lbl = QLabel(self)
+        #lbl.setPixmap(pixmap)
+        #hbox.addWidget(lbl)
+        #self.setLayout(hbox)
 
 
         self.startbutton.setPalette(palette)
@@ -177,4 +188,5 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
+
     sys.exit(app.exec_())

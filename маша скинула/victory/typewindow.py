@@ -16,19 +16,38 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtMultimedia
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent, QSound
-from PyQt5.QtCore import QUrl
+from PyQt5.QtCore import QUrl, QThread, pyqtSignal
 import random
 import time
 import datetime
 import os
 from shutil import get_terminal_size
 import difflib as df
+
+from PyQt5.QtWidgets import QWidget
+
 from aftertype import *
 from timer import *
 from save import *
 from recordtable import *
 from operator import itemgetter
 import pickle
+
+class DummyThread(QThread):
+    finished = pyqtSignal()
+    def run(self):
+        time.sleep(1)
+        self.finished.emit()
+
+class Example(QWidget):
+    [...]
+    def changeLabels(self):
+        for lbl in self.labels:
+            orgTxt = lbl.text()
+            lbl.setText("%s Running" % orgTxt)
+            thread = DummyThread(self)
+            thread.start()
+            thread.finished.connect(lambda txt=orgTxt, lbl=lbl : lbl.setText("%s Done" % txt))
 
 class Ui_MainWindow1(object): 
 
@@ -42,11 +61,11 @@ class Ui_MainWindow1(object):
         self.ui.setup3(self.Dialog)
         self.Dialog.show()
 
-    def play(self):
-        self.player.play()
+    #def play(self):
+    #    self.player.play()
 
-    def pause(self):
-        self.player.pause()
+    #def pause(self):
+    #    self.player.pause()
 
     def funcstart(self):
         self.textread()
@@ -112,10 +131,10 @@ class Ui_MainWindow1(object):
                     #self.editor.setStyleSheet("QTextEdit {color:red}")
                     #current_text = self.textEdit_2.toPlainText()
                     #previous_html = self.textEdit_2.toHtml()
-                    self.textEdit.setTextColor( QtGui.QColor( "red" ))
+                    self.textEdit.setTextColor( QtGui.QColor("red"))
                 else: 
                     #self.textEdit.setText('')
-                    self.textEdit.setTextColor( QtGui.QColor( "green" ) )
+                    self.textEdit.setTextColor( QtGui.QColor("green"))
                     #self.textEdit_2.append( current_text)
                 index += 1
                 totaltime = time2 - time1
@@ -133,7 +152,6 @@ class Ui_MainWindow1(object):
 
 
     def setup1(self, MainWindow):
-        #refline = self.textread()
 
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1000, 830)
@@ -235,7 +253,7 @@ class Ui_MainWindow1(object):
         font.setPointSize(14)
         self.playbutton.setFont(font)
         self.playbutton.setObjectName("playbutton")
-        self.playbutton.clicked.connect(self.play)
+        #self.playbutton.clicked.connect(self.play)
 
 
         self.pausebutton = QtWidgets.QPushButton(self.centralwidget)
@@ -245,7 +263,7 @@ class Ui_MainWindow1(object):
         font.setPointSize(14)
         self.pausebutton.setFont(font)
         self.pausebutton.setObjectName("pausebutton")
-        self.pausebutton.clicked.connect(self.pause)
+        #self.pausebutton.clicked.connect(self.pause)
 
 
         self.retranslateUi(MainWindow)
