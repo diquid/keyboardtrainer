@@ -15,7 +15,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtMultimedia
-from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent, QSound
+from PyQt5.QtGui import QFont
+from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 from PyQt5.QtCore import QUrl, QThread, pyqtSignal
 import random
 import time
@@ -63,15 +64,10 @@ class Ui_MainWindow1(object):
         self.Dialog.show()
 
     def play(self):
-        playsound('SLAVA_MARLOW_-_Snova_ya_napivayus.mp3')
-        # winsound.PlaySound(r'SLAVA_MARLOW_-_Snova_ya_napivayus.mp3', winsound.SND_ASYNC)
-        # thread1 = Thread(target=playsound, args=("SLAVA_MARLOW_-_Snova_ya_napivayus.mp3.mp3",))
-        # thread1.start()
-        # thread1.join()
-        # input("press ENTER to stop playback")
+        self.player.play()
 
     def pause(self):
-        playsound('SLAVA_MARLOW_-_Snova_ya_napivayus.mp3')
+        self.player.pause()
 
     def funcstart(self):
         self.textread()
@@ -96,7 +92,6 @@ class Ui_MainWindow1(object):
                 line_count += 1
         random1 = random.randint(1, line_count)
         textf = open('baza.txt').readlines()
-        length_textf = len(textf)
         refline = textf[random1 - 1]
         self.textEdit_2.setText(refline)
         self.pushButton.setEnabled(False)
@@ -109,9 +104,6 @@ class Ui_MainWindow1(object):
     def show_timer_text(self):
         self.label_5.setText("Прошло времени:")
 
-    def clean(self):
-        symbol = self.textEdit.toPlainText()
-
     def saveresults(self):
         tableresults.append()
         tableresults = [null] * 11
@@ -122,40 +114,6 @@ class Ui_MainWindow1(object):
         tableresults = sorted(tableresults, key = itemgetter(1), reverse=True)[:10]
 
     def errorscount(self):
-        refline = self.textEdit_2.toPlainText()
-        typedline = self.textEdit.toPlainText()
-        current_index = len(typedline)-1
-        errors = 0
-        index = 0
-        # if len(typedline) == 1:
-        #     if typedline[0] == refline[0]:
-        #         self.textEdit.setTextColor(QtGui.QColor("green"))
-        #         self.textEdit.setText(typedline)
-        #     else:
-        #         self.textEdit.setTextColor(QtGui.QColor("red"))
-        #         self.textEdit.setText(typedline)
-        #         errors += 1
-        for i in typedline:
-            try:
-                if refline[index] != i:
-                    errors += 1
-                    #self.textEdit.setTextColor(QtGui.QColor("red"))
-                    self.textEdit.setStyleSheet("QTextEdit {color: red}")
-                else:
-                    #self.textEdit.setTextColor(QtGui.QColor("green"))
-                    self.textEdit.setStyleSheet("QTextEdit {color: green}")
-
-                index += 1
-                # if typedline[current_index] != refline[current_index]:
-                #     self.textEdit.setTextColor(QtGui.QColor("red"))
-                #     self.textEdit.setText(typedline)
-                #     errors += 1
-                # else:
-                #     self.textEdit.setTextColor(QtGui.QColor("green"))
-                #     typedline = self.textEdit.toPlainText()
-                #     self.textEdit.setText(typedline)
-            except IndexError as e:
-                self.aftertype()
         self.label_3.setText("Количество ошибок: " + str(errors))
         #self.label_4.setText("Скорость набора:" + str(typespeed))
         self.label_5.setText("Прошло времени:")# + str(totaltime))
@@ -170,13 +128,15 @@ class Ui_MainWindow1(object):
 
         self.textEdit_2 = QtWidgets.QTextEdit(self.centralwidget)
         self.textEdit_2.setGeometry(QtCore.QRect(20, 10, 961, 201))
+        self.textEdit_2.setFont(QFont('Courier New'))
+        self.textEdit_2.setFontPointSize(14)
         self.textEdit_2.setObjectName("textEdit_2")  # текст
 
         self.textEdit = TextEditor(self.centralwidget, self.textEdit_2.toPlainText())
         self.textEdit.setGeometry(QtCore.QRect(20, 330, 961, 201))
-        self.textEdit.setObjectName("textEdit") #ввод
-        #self.textEdit.textChanged.connect(self.errorscount)
-
+        self.textEdit.setFont(QFont('Courier New'))
+        self.textEdit.setFontPointSize(14)
+        self.textEdit.setObjectName("textEdit")  # ввод
 
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(20, 300, 311, 21))
@@ -246,7 +206,6 @@ class Ui_MainWindow1(object):
         #self.pushButton.clicked.connect(lambda: self.textEdit_2.append(refline))        
         #self.pushButton.setEnabled(False)
 
-
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1000, 26))
@@ -256,6 +215,9 @@ class Ui_MainWindow1(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
+        self.player = QMediaPlayer()
+        url = QUrl.fromLocalFile(r'SLAVA_MARLOW_-_Snova_ya_napivayus.mp3')
+        self.player.setMedia(QMediaContent(url))
 
         self.playbutton = QtWidgets.QPushButton(self.centralwidget)
         self.playbutton.setGeometry(QtCore.QRect(830, 700, 50, 50))
@@ -264,8 +226,7 @@ class Ui_MainWindow1(object):
         font.setPointSize(14)
         self.playbutton.setFont(font)
         self.playbutton.setObjectName("playbutton")
-        #self.playbutton.clicked.connect(self.play)
-
+        self.playbutton.clicked.connect(self.play)
 
         self.pausebutton = QtWidgets.QPushButton(self.centralwidget)
         self.pausebutton.setGeometry(QtCore.QRect(900, 700, 50, 50))
@@ -274,8 +235,7 @@ class Ui_MainWindow1(object):
         font.setPointSize(14)
         self.pausebutton.setFont(font)
         self.pausebutton.setObjectName("pausebutton")
-        #self.pausebutton.clicked.connect(self.pause)
-
+        self.pausebutton.clicked.connect(self.pause)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)

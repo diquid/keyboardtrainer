@@ -22,8 +22,6 @@ class TextEditor(QTextEdit):
         self.Dialog.show()
 
     def keyPressEvent(self, e) -> None:
-        # typed_text = self.textEdit.toPlainText()
-        # index = len(typed_text) - 1
         key = e.text()
         max_index = len(self.ref_text)
         if (e.key() == Qt.Key_Shift) | (e.key() == Qt.Key_Alt):
@@ -37,6 +35,6 @@ class TextEditor(QTextEdit):
                self.setTextColor(QtGui.QColor("red"))
             self.index += 1
 
-        if self.index == max_index:
+        if max_index - self.index == 1:
             self.aftertype()
         QTextEdit.keyPressEvent(self, e)

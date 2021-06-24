@@ -96,15 +96,10 @@ class Ui_MainWindow(object):
         self.window.show()
 
     def play(self):
-        playsound('SLAVA_MARLOW_-_Snova_ya_napivayus.mp3')
-        #winsound.PlaySound(r'SLAVA_MARLOW_-_Snova_ya_napivayus.mp3', winsound.SND_ASYNC)
-        #thread1 = Thread(target=playsound, args=("SLAVA_MARLOW_-_Snova_ya_napivayus.mp3.mp3",))
-        #thread1.start()
-        #thread1.join()
-        #input("press ENTER to stop playback")
+        self.player.play()
 
     def pause(self):
-        playsound('SLAVA_MARLOW_-_Snova_ya_napivayus.mp3')
+        self.player.pause()
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -151,7 +146,6 @@ class Ui_MainWindow(object):
         self.label_4.setObjectName("label_3")
         self.label_4.move(670, 300)
 
-
         self.startbutton.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("Courier New")
@@ -159,7 +153,6 @@ class Ui_MainWindow(object):
         self.startbutton.setFont(font)
         self.startbutton.setObjectName("startbutton")
         self.startbutton.clicked.connect(self.start)
-
 
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(250, 20, 461, 81))
@@ -171,7 +164,6 @@ class Ui_MainWindow(object):
         self.label.setFont(font)
         self.label.setObjectName("label")
 
-
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(160, 70, 650, 71))
         font = QtGui.QFont()
@@ -181,7 +173,6 @@ class Ui_MainWindow(object):
         font.setWeight(50)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
-
 
         self.recordsbutton = QtWidgets.QPushButton(self.centralwidget)
         self.recordsbutton.setGeometry(QtCore.QRect(340, 300, 301, 71))
@@ -201,6 +192,9 @@ class Ui_MainWindow(object):
         self.exitbutton.setObjectName("exitbutton")
         self.exitbutton.clicked.connect(quit)
 
+        self.player = QMediaPlayer()
+        url = QUrl.fromLocalFile(r'SLAVA_MARLOW_-_Snova_ya_napivayus.mp3')
+        self.player.setMedia(QMediaContent(url))
 
         self.playbutton = QtWidgets.QPushButton(self.centralwidget)
         self.playbutton.setGeometry(QtCore.QRect(830, 600, 50, 50))
@@ -211,7 +205,6 @@ class Ui_MainWindow(object):
         self.playbutton.setObjectName("playbutton")
         self.playbutton.clicked.connect(self.play)
 
-
         self.pausebutton = QtWidgets.QPushButton(self.centralwidget)
         self.pausebutton.setGeometry(QtCore.QRect(900, 600, 50, 50))
         font = QtGui.QFont()
@@ -221,13 +214,11 @@ class Ui_MainWindow(object):
         self.pausebutton.setObjectName("pausebutton")
         self.pausebutton.clicked.connect(self.pause)
 
-
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1000, 26))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
-
 
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
