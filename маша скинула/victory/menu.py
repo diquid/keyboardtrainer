@@ -20,61 +20,6 @@ import multiprocessing
 from threading import Thread
 
 
-# paused = False    # global to track if the audio is paused
-# def on_press(key):
-#     global paused
-#     print (key)
-#     if key == keyboard.Key.space:
-#         if stream.is_stopped():     # time to play audio
-#             print ('play pressed')
-#             stream.start_stream()
-#             paused = False
-#             return False
-#         elif stream.is_active():   # time to pause audio
-#             print ('pause pressed')
-#             stream.stop_stream()
-#             paused = True
-#             return False
-#     return False
-#
-#
-# # you audio here
-# wf = open('SLAVA_MARLOW_-_Snova_ya_napivayus.mp3', 'rb')
-#
-# # instantiate PyAudio
-# p = pyaudio.PyAudio()
-#
-# # define callback
-# def callback(in_data, frame_count, time_info, status):
-#     data = wf.readframes(frame_count)
-#     return (data, pyaudio.paContinue)
-#
-# # open stream using callback
-# stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
-#                 channels=wf.getnchannels(),
-#                 rate=wf.getframerate(),
-#                 output=True,
-#                 stream_callback=callback)
-#
-# # start the stream
-# stream.start_stream()
-#
-# while stream.is_active() or paused==True:
-#     with keyboard.Listener(on_press=on_press) as listener:
-#         listener.join()
-#     time.sleep(0.1)
-#
-# # stop stream
-# stream.stop_stream()
-# stream.close()
-# wf.close()
-#
-# # close PyAudio
-# p.terminate()
-
-#playsound('SLAVA_MARLOW_-_Snova_ya_napivayus.mp3')
-
-
 class Ui_MainWindow(object):
 
     def start(self):
@@ -106,6 +51,8 @@ class Ui_MainWindow(object):
         MainWindow.resize(1000, 700)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+        self.centralwidget.setStyleSheet("background-color: #87CEFA;")
+
         self.startbutton = QtWidgets.QPushButton(self.centralwidget)
         self.startbutton.setGeometry(QtCore.QRect(340, 210, 301, 71))
         palette = QtGui.QPalette()
@@ -127,12 +74,6 @@ class Ui_MainWindow(object):
         brush = QtGui.QBrush(QtGui.QColor(170, 170, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Light, brush)
-        #hbox = QHBoxLayout(self)
-        #pixmap = QPixmap("1pic.jpg")
-        #lbl = QLabel(self)
-        #lbl.setPixmap(pixmap)
-        #hbox.addWidget(lbl)
-        #self.setLayout(hbox)
 
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         pixmap = QPixmap('20pic.png')
@@ -151,13 +92,14 @@ class Ui_MainWindow(object):
         font.setFamily("Courier New")
         font.setPointSize(14)
         self.startbutton.setFont(font)
+        self.startbutton.setStyleSheet("background-color: #4682B4;")
         self.startbutton.setObjectName("startbutton")
         self.startbutton.clicked.connect(self.start)
 
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(250, 20, 461, 81))
+        self.label.setGeometry(QtCore.QRect(250, 20, 461, 61))
         font = QtGui.QFont()
-        font.setFamily("Courier New")
+        font.setFamily("Century Gothic")
         font.setPointSize(28)
         font.setBold(False)
         font.setWeight(50)
@@ -165,9 +107,9 @@ class Ui_MainWindow(object):
         self.label.setObjectName("label")
 
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(160, 70, 650, 71))
+        self.label_2.setGeometry(QtCore.QRect(160, 75, 650, 61))
         font = QtGui.QFont()
-        font.setFamily("Courier New")
+        font.setFamily("Century Gothic")
         font.setPointSize(28)
         font.setBold(False)
         font.setWeight(50)
@@ -180,6 +122,7 @@ class Ui_MainWindow(object):
         font.setFamily("Courier New")
         font.setPointSize(14)
         self.recordsbutton.setFont(font)
+        self.recordsbutton.setStyleSheet("background-color: #4682B4;")
         self.recordsbutton.setObjectName("recordsbutton")
         self.recordsbutton.clicked.connect(self.records)
 
@@ -189,11 +132,12 @@ class Ui_MainWindow(object):
         font.setFamily("Courier New")
         font.setPointSize(14)
         self.exitbutton.setFont(font)
+        self.exitbutton.setStyleSheet("background-color: #4682B4;")
         self.exitbutton.setObjectName("exitbutton")
         self.exitbutton.clicked.connect(quit)
 
         self.player = QMediaPlayer()
-        url = QUrl.fromLocalFile(r'SLAVA_MARLOW_-_Snova_ya_napivayus.mp3')
+        url = QUrl.fromLocalFile(r'BAL_SATANY_-_Gimn_Volanda.mp3')
         self.player.setMedia(QMediaContent(url))
 
         self.playbutton = QtWidgets.QPushButton(self.centralwidget)
@@ -202,6 +146,7 @@ class Ui_MainWindow(object):
         font.setFamily("Courier New")
         font.setPointSize(14)
         self.playbutton.setFont(font)
+        self.playbutton.setStyleSheet("background-color: #4682B4;")
         self.playbutton.setObjectName("playbutton")
         self.playbutton.clicked.connect(self.play)
 
@@ -211,6 +156,7 @@ class Ui_MainWindow(object):
         font.setFamily("Courier New")
         font.setPointSize(14)
         self.pausebutton.setFont(font)
+        self.pausebutton.setStyleSheet("background-color: #4682B4;")
         self.pausebutton.setObjectName("pausebutton")
         self.pausebutton.clicked.connect(self.pause)
 

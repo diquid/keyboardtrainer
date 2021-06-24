@@ -13,6 +13,7 @@ import typewindow
 from menu import *
 from recordtable import *
 
+
 class Ui_Dialog3(object):
 
     def start(self):
@@ -37,6 +38,7 @@ class Ui_Dialog3(object):
 
         Dialog.setObjectName("Dialog")
         Dialog.resize(710, 539)
+        Dialog.setStyleSheet("background-color: #87CEFA;")
         self.pushButton = QtWidgets.QPushButton(Dialog)
         self.pushButton.setGeometry(QtCore.QRect(150, 310, 411, 28))
         font = QtGui.QFont()

@@ -14,6 +14,7 @@ from save import *
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLineEdit, QPushButton
 from PyQt5.QtGui import QIcon
 
+
 class Ui_MainWindow4(object):
 
     def menu(self):
@@ -27,11 +28,12 @@ class Ui_MainWindow4(object):
         MainWindow.resize(1000, 700)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+        self.centralwidget.setStyleSheet("background-color: #87CEFA;")
 
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(250, 0, 471, 91))
         font = QtGui.QFont()
-        font.setFamily("Courier New")
+        font.setFamily("Century Gothic")
         font.setPointSize(28)
         self.label.setFont(font)
         self.label.setObjectName("label")
@@ -42,6 +44,7 @@ class Ui_MainWindow4(object):
         font.setFamily("Courier New")
         font.setPointSize(10)
         self.returntomenu.setFont(font)
+        self.returntomenu.setStyleSheet("background-color: #4682B4;")
         self.returntomenu.setObjectName("returntomenu")
         self.returntomenu.clicked.connect(self.menu)
 
@@ -50,6 +53,7 @@ class Ui_MainWindow4(object):
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(3)
         self.tableWidget.setRowCount(10)
+        self.tableWidget.setStyleSheet("background-color: #F0F8FF;")
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setVerticalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
